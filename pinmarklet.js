@@ -450,20 +450,20 @@
                 handlers: {
                     instagram: function(a) {
                         var b;
-                        if (a && a.thumbnail_url && a.title && a.html),
-                          document.getElementsByTagName('video')[0] ? (b = document.getElementsByTagName('video')[0].getAttribute('src'),
-                              d.f.debug("Debug: found video: " + b)) : (b = a.thumbnail_url,
-                              d.f.debug("Debug: found image: " + b)),
-                              (o = {
-                                  media: b,
-                                  set: {
+                        if (a && a.thumbnail_url && a.title && a.html)
+                            document.getElementsByTagName('video')[0] ? (b = document.getElementsByTagName('video')[0].getAttribute('src'),
+                            d.f.debug("Debug: found video: " + b)) : (b = a.thumbnail_url,
+                            d.f.debug("Debug: found image: " + b)),
+                            (o = {
+                                 media: b,
+                                 set: {
                                       url: b,
                                       description: a.html.split('<a href="')[1].split('"')[0],
                                       isVideo: !0,
                                       attrib: "instagram"
-                                  }
-                              },
-                              d.f.loadImg(o))
+                                 }
+                            },
+                            d.f.loadImg(o))
                     }
                 },
                 srcSet: function(a) {
