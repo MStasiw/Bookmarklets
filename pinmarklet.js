@@ -138,6 +138,7 @@
                 },
                 debug: function(a) {
                     d.w.console && d.w.console.log && d.v.config.debug && d.w.console.log(a)
+                        , console.log(a) //I added this line
                 },
                 getConfig: function() {
                     var a = d.d.getElementsByTagName("SCRIPT")
@@ -166,7 +167,7 @@
                 getSelection: function() {
                     return ("" + (d.w.getSelection ? d.w.getSelection() : d.d.getSelection ? d.d.getSelection() : d.d.selection.createRange().text)).replace(/(^\s+|\s+$)/g, "")
                 },
-                getDim: function(a) {
+                getDim: function(a) { // GETS IMAGE DIMENSIONS, and returns an object {h: #, w: #}
                     var b, c;
                     return b = 0,
                     c = 0,
@@ -187,7 +188,7 @@
                         d.f.debug(c + " is not a valid image file type."))),
                         b
                     },
-                    visibility: function(a) {
+                    visibility: function(a) { // Checks whether any elements parent to the image are set to 'display="none"' or 'visibility="hidden"', and sets b to true or false
                         var b, c, e;
                         for (c = a.parentNode,
                         b = !0; c && "HTML" !== c.tagName; ) {
@@ -201,18 +202,18 @@
                         return e && d.f.debug(e),
                         b
                     },
-                    noPin: function(a) {
+                    noPin: function(a) { //Checks and Sets whether PINNING IS ALLOWED
                         var b, c;
-                        return b = !0,
-                        d.f.get(a, "data-pin-nopin") && (b = !1,
+                        return b = !0, //= true
+                        d.f.get(a, "data-pin-nopin") && (b = !0, //was !1 //= false
                         c = a.src + ": data-pin-nopin=true"),
-                        d.f.get(a, "nopin") && (b = !1,
+                        d.f.get(a, "nopin") && (b = !0, //was !1 //= false
                         c = a.src + ": nopin=nopin",
-                        d.f.log({
+                        /*d.f.log({ //DO NOT LOG THIS to Pinterest company
                             reason: "image_with_inline_nopin",
                             img: a.src
-                        })),
-                        c && d.f.debug(c),
+                        })*/),
+                        c && d.f.debug('image with inline nopin\n' + c),
                         b
                     },
                     size: function(a) {
@@ -240,7 +241,7 @@
                         c === !0 && d.f.debug("Found high-quality image link: " + f),
                         c
                     },
-                    domain: function(a) {
+                    domain: function(a) { // Checks and if domain in hashlist sets to true, blocking pinning from that domain
                         var b, c, e, f, g;
                         if (g = a,
                         "object" === typeof a && (g = a.src),
@@ -986,10 +987,10 @@
     d.f.init()
 }(window, document, {
     k: "PIN_" + (new Date).getTime(),
-    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/,
+    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/, //may need to change to location of script
     grid: "https://assets.pinterest.com/ext/grid.html",
     maxWait: 5e3,
-    quality: 30,
+    quality: 30, //is this quality pinned image saved as?
     xv: "data-pinterest-extension-installed",
     log: "https://log.pinterest.com/",
     hazPinningNow: "data-pinterest-pinmarklet-rendered",
@@ -1047,13 +1048,14 @@
         jpg: 1,
         jpeg: 1,
         png: 1,
+        svg: 1, //I added
         webp: 1
     },
     invalidImageFileType: {
-        svg: 1
+        dummy: 1 //was svg: 1
     },
-    imgLimitMin: 119,
-    imgLimitFloor: 79,
+    imgLimitMin: 79,//was 119   //I think these
+    imgLimitFloor: 79,          //two should be equal
     imgLimitHorz: 3,
     thumbCellSize: 236,
     thumbCellMargin: 14,
