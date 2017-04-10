@@ -208,8 +208,8 @@
                         d.f.get(a, "data-pin-nopin") && (b = !0, //was !1 //= false
                         c = a.src + ": data-pin-nopin=true"),
                         d.f.get(a, "nopin") && (b = !0, //was !1 //= false
-                        c = a.src + ": nopin=nopin",
-                        /*d.f.log({ //DO NOT LOG THIS to Pinterest company
+                        c = a.src + ": nopin=nopin"/*,
+                        d.f.log({ //DO NOT LOG THIS to Pinterest company
                             reason: "image_with_inline_nopin",
                             img: a.src
                         })*/),
@@ -995,7 +995,7 @@
     d.f.init()
 }(window, document, {
     k: "PIN_" + (new Date).getTime(),
-    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/, //may need to change to location of script to "github.com/MStasiw/Bookmarklets/raw/master/pinmarklet.js"
+    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/, //may need to change to location of script to "cdn.rawgit.com/MStasiw/Bookmarklets/a69bfaac/pinmarklet.js"
     grid: "https://assets.pinterest.com/ext/grid.html",
     maxWait: 5e3,
     quality: 30, //is this quality pinned image saved as?
