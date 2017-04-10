@@ -278,6 +278,7 @@
                         return b
                     },
                     iframe: function(a) {
+                        d.f.debug("Debug: iframe(a): a = " + a + ", a.src = " + a.src);
                         var b, c;
                         if (a.src.match(d.a.pattern.instagram.url) && (c = a.src.split("embed"),
                         c[1] && (b = "https://api.instagram.com/oembed?url=" + encodeURIComponent(c[0]),
@@ -358,11 +359,11 @@
                         f = d.f.get(a, "name"),
                         g && h && (d.f.debug("got language " + h + " from http-equiv meta"),
                         d.f.setLang(h)),
-                        b && (f && "pinterest" === f && ("nopin" === b.toLowerCase() && (d.v.data.close = c || d.v.msg.noPinMeta,
+                        b && (f && "pinterest" === f && ("nopin" === b.toLowerCase() && (d.v.data.close = c || d.v.msg.noPinMeta, //start   IS THIS TO PREVENT PINNING IF nopin IS FOUND AS ATTRIBUTE?
                         d.f.log({
                             reason: "found_nopin_meta"
                         }),
-                        d.f.debug("found pinterest nopin meta")),
+                        d.f.debug("found pinterest nopin meta")), //end
                         "nohover" === b.toLowerCase() && (d.v.noHoverMeta = !0,
                         d.f.debug("found pinterest nohover meta"),
                         d.f.log({
@@ -448,14 +449,21 @@
                 },
                 handlers: {
                     instagram: function(a) {
-                        a && a.thumbnail_url && a.title && a.html && (o = {
-                            media: a.thumbnail_url,
-                            set: {
-                                url: a.html.split('<a href="')[1].split('"')[0],
-                                description: a.title
-                            }
-                        },
-                        d.f.loadImg(o))
+                        var b;
+                        if (a && a.thumbnail_url && a.title && a.html),
+                          document.getElementsByTagName('video')[0] ? (b = document.getElementsByTagName('video')[0].getAttribute('src'),
+                              d.f.debug("Debug: found video: " + b)) : (b = a.thumbnail_url,
+                              d.f.debug("Debug: found image: " + b)),
+                              (o = {
+                                  media: b,
+                                  set: {
+                                      url: b,
+                                      description: a.html.split('<a href="')[1].split('"')[0],
+                                      isVideo: !0,
+                                      attrib: "instagram"
+                                  }
+                              },
+                              d.f.loadImg(o))
                     }
                 },
                 srcSet: function(a) {
@@ -987,7 +995,7 @@
     d.f.init()
 }(window, document, {
     k: "PIN_" + (new Date).getTime(),
-    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/, //may need to change to location of script
+    me: /\/\/assets\.pinterest\.com\/js\/pinmarklet\.js/, //may need to change to location of script to "github.com/MStasiw/Bookmarklets/raw/master/pinmarklet.js"
     grid: "https://assets.pinterest.com/ext/grid.html",
     maxWait: 5e3,
     quality: 30, //is this quality pinned image saved as?
